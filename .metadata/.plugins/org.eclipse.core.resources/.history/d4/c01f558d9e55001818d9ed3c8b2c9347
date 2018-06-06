@@ -1,0 +1,50 @@
+package com.pavan.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.pavan.dao.ConsultantDAO;
+import com.pavan.model.ConsultantBO;
+
+@Service
+public class ConsultantServiceImpl implements ConsultantService {
+	
+	private ConsultantDAO clientDAO;
+
+	public void setConsultantDAO(ConsultantDAO clientDAO) {
+		this.clientDAO = clientDAO;
+	}
+
+	@Override
+	@Transactional
+	public void addConsultant(ConsultantBO p) {
+		this.clientDAO.addConsultant(p);
+	}
+
+	@Override
+	@Transactional
+	public void updateConsultant(ConsultantBO p) {
+		this.clientDAO.updateConsultant(p);
+	}
+
+	@Override
+	@Transactional
+	public List<ConsultantBO> listConsultants() {
+		return this.clientDAO.listConsultants();
+	}
+
+	@Override
+	@Transactional
+	public ConsultantBO getConsultantById(int id) {
+		return this.clientDAO.getConsultantById(id);
+	}
+
+	@Override
+	@Transactional
+	public void deleteConsultant(int id) {
+		this.clientDAO.deleteConsultant(id);
+	}
+
+}

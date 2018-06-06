@@ -1,0 +1,50 @@
+package com.pavan.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.pavan.dao.ClientDAO;
+import com.pavan.model.ClientBO;
+
+@Service
+public class ClientServiceImpl implements ClientService {
+	
+	private ClientDAO employeeDAO;
+
+	public void setClientDAO(ClientDAO employeeDAO) {
+		this.employeeDAO = employeeDAO;
+	}
+
+	@Override
+	@Transactional
+	public void addClient(ClientBO p) {
+		this.employeeDAO.addClient(p);
+	}
+
+	@Override
+	@Transactional
+	public void updateClient(ClientBO p) {
+		this.employeeDAO.updateClient(p);
+	}
+
+	@Override
+	@Transactional
+	public List<ClientBO> listClients() {
+		return this.employeeDAO.listClients();
+	}
+
+	@Override
+	@Transactional
+	public ClientBO getClientById(int id) {
+		return this.employeeDAO.getClientById(id);
+	}
+
+	@Override
+	@Transactional
+	public void deleteClient(int id) {
+		this.employeeDAO.deleteClient(id);
+	}
+
+}

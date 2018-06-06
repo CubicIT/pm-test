@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Employee Form</h2>
+   <form  th:object="${employee}" th:action="@{/employees/}" method="post">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" class="form-control" name="firstName" th:value="*{employee.firstName}" />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" class="form-control" name="lastName" th:value="*{employee.lastName}" />
+    </div>
+    <div class="form-group">
+      <label for="jobTitle">Job Title:</label>
+      <input type="text" id="jobTile" class="form-control" name="jobTitle" th:value="*{employee.jobTitle}" />
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth:</label>
+      <input type="text" id="dob" class="form-control" name="dob" th:value="*{employee.dob}" />
+    </div>
+    <div class="form-group">
+      <label for="hiringDate">Hiring Date:</label>
+      <input type="text" id="hiringDate" class="form-control" name="hiringDate" th:value="*{employee.hiringDate}" />
+    </div>
+    <div class="form-group">
+      <label for="terminationDate">Termination Date:</label>
+      <input type="text" id="terminationDate" class="form-control" name="terminationDate" th:value="*{employee.terminationDate}" />
+    </div>
+    <div class="form-group">
+      <label for="telephone">Telephone:</label>
+      <input type="text" id="telephone" class="form-control" name="telephone" th:value="*{employee.telephone}" />
+    </div>
+    <div class="form-group">
+      <label for="email">Telephone:</label>
+      <input type="text" id="email" class="form-control" name="email" th:value="*{employee.email}" />
+    </div>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  
+</div>
+
+</body>
+</html>

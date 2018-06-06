@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>Employees List</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Date of Birth</th>
+				<th>Telephone</th>
+				<th>Job Title</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="employee : ${employees}">
+				<td th:text="${employee.firstName}"></td>
+				<td th:text="${employee.lastName}"></td>
+				<td th:text="${employee.email}"></td>
+				<td th:text="${employee.dob}"></td>
+				<td th:text="${employee.telephone}"></td>
+				<td th:text="${employee.jobTitle}"></td>
+				<td><a href="#" class="glyphicon glyphicon-edit"  title="edit" 
+				th:href="@{'/employee/show/' + ${employee.id}}"></a></td>	
+			</tr>
+		</table>
+	</div>
+	<div class="container">
+		<h2>Employees List</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Evaluation</th>
+				<th>Role</th>
+				<th>Salary</th>
+				<th>Social #</th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each="employee : ${employees}">
+				<td th:text="${employee.empInfo.evaluation}"></td>
+				<td th:text="${employee.empInfo.role}"></td>
+				<td th:text="${employee.empInfo.salary}"></td>
+				<td th:text="${employee.empInfo.scn}"></td>
+				<td><a href="/employee/showEmpPopup"
+					th:href="@{/employee/showEmpPopup/}"
+					class="glyphicon glyphicon-edit" title="edit"> </a></td>
+			</tr>
+		</table>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('#employeeTable').DataTable();
+		});
+		function saveEmployee() {
+			if ($("#firstName").val() == "") {
+				showMessage("Please Enter First Name", "warning");
+				$("#firstName").focus();
+				return false;
+			} else if ($("#lastName").val() == "") {
+				showMessage("Please Enter Last Name", "warning");
+				$("#lastName").focus();
+				return false;
+			} else if ($("#email").val() == "") {
+				showMessage("Please Enter Email", "warning");
+				$("#email").focus();
+				return false;
+			} else if ($("#dob").val() == "") {
+				showMessage("Please Select Date Of Birth", "warning");
+				$("#dob").focus();
+				return false;
+			} else if ($("#hiringDate").val() == "") {
+				showMessage("Please Select Hiring Date", "warning");
+				$("#hiringDate").focus();
+				return false;
+			} else if ($("#telephone").val() == "") {
+				showMessage("Please Enter Telephone", "warning");
+				$("#telephone").focus();
+				return false;
+			} else if ($("#jobTitle").val() == "") {
+				showMessage("Please Enter Job Title", "warning");
+				$("#jobTitle").focus();
+				return false;
+			}
+
+			else {
+				$.ajax({
+					url : $("#employeeFormId").attr("action"),
+					type : 'post',
+					data : $("#employeeFormId").serialize(),
+					success : function(data) {
+						alert(data);
+						$("#employeeFormId")[0].reset();
+						window.location.reload();
+					},
+					error : function() {
+						alert("Unable to load details.");
+					}
+				});
+			}
+		}
+
+		function showEmpPopup(serverUrl) {
+			$.ajax({
+				url : serverUrl,
+				type : 'get',
+				success : function(data) {
+					$("#empAddPopupId").html(data);
+					$('#empAddModal').modal('show');
+				},
+				error : function() {
+					alert("Unable to load details.");
+				}
+			});
+		}
+
+		function showEmpInfoPopup(serverUrl) {
+			$.ajax({
+				url : serverUrl,
+				type : 'get',
+				success : function(data) {
+					$("#empInfoPopupId").html(data);
+					$('#empInfoModal').modal('show');
+				},
+				error : function() {
+					alert("Unable to load details.");
+				}
+			});
+		}
+
+		function updateEmloyee(serverUrl) {
+			$.ajax({
+				url : serverUrl,
+				type : 'get',
+				success : function(data) {
+					$("#empAddPopupId").html(data);
+					$('#empAddModal').modal('show');
+				},
+				error : function() {
+					alert("Unable to load details.");
+				}
+			});
+		}
+
+		toastr.options = {
+			"closeButton" : true,
+			"debug" : false,
+			"newestOnTop" : true,
+			"progressBar" : true,
+			"positionClass" : "toast-top-right",
+			"preventDuplicates" : true,
+			"onclick" : null,
+			"showDuration" : "300",
+			"hideDuration" : "1000",
+			"timeOut" : "5000",
+			"extendedTimeOut" : "1000",
+			"showEasing" : "swing",
+			"hideEasing" : "linear",
+			"showMethod" : "fadeIn",
+			"hideMethod" : "fadeOut"
+		}
+
+		function showMessage(message, type) {
+			if (type == "error") {
+				toastr.error(message, "Error");
+			} else if (type == "info") {
+				toastr.info(message, "Info");
+			} else if (type == "warning") {
+				toastr.warning(message, "Warning");
+			} else if (type == "success") {
+				toastr.success(message, "Success");
+			} else {
+			}
+		}
+	</script>
+</body>
+</html>

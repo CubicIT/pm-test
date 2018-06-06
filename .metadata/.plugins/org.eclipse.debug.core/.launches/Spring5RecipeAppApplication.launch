@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/spring5-recipe-app/src/main/java/guru/springframework/Spring5RecipeAppApplication.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="guru.springframework.Spring5RecipeAppApplication"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="spring5-recipe-app"/>
+</launchConfiguration>

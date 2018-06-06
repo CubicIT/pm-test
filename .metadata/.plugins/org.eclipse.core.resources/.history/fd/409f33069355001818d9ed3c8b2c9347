@@ -1,0 +1,14 @@
+package com.pavan.dao;
+
+import java.util.List;
+
+import com.pavan.model.EmpBO;
+
+public interface EmployeeDAO {
+
+	public void addEmployee(EmpBO p);
+	public void updateEmployee(EmpBO p);
+	public List<EmpBO> listEmployees();
+	public EmpBO getEmployeeById(int id);
+	public void deleteEmployee(int id);
+}

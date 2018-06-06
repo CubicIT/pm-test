@@ -1,0 +1,14 @@
+package com.pavan.dao;
+
+import java.util.List;
+
+import com.pavan.model.ProBO;
+
+public interface ProjectDAO {
+
+	public void addProject(ProBO p);
+	public void updateProject(ProBO p);
+	public List<ProBO> listProjects();
+	public ProBO getProjectById(int id);
+	public void removeProject(int id);
+}

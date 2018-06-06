@@ -1,0 +1,127 @@
+package com.pavan.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.web.entity.Review;
+
+@Entity
+@Table(name = "CLIENT")
+public class ClientBP {
+
+	@Id
+	@Column(name = "CLIENT_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "contact_person")
+	private String contactPerson;
+
+	@Column(name = "phone")
+	private String phone;
+
+	@Column(name = "email")
+	private String email;
+
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Review> reviews;
+
+	public Client() {
+
+	}
+
+	public Client(String name, String contactPerson, String phone, String email) {
+
+		this.name = name;
+		this.contactPerson = contactPerson;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	public void add(Review review) {
+		
+		if (reviews ==null) {
+			reviews = new ArrayList<>();
+		}
+		reviews.add(review);
+		review.setClient(this);
+	}
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", name=" + name + ", contactPerson=" + contactPerson + ", phone=" + phone
+				+ ", email=" + email + "]";
+	}
+	
+	
+}

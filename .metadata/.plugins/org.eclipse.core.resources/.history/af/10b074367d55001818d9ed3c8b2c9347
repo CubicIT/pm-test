@@ -1,0 +1,126 @@
+package com.pavan.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+@Entity
+@Table(name = "ClientBO")
+public class ClientBO {
+
+	@Id
+	@Column(name = "Client_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "contact_person")
+	private String contactPerson;
+
+	@Column(name = "phone")
+	private String phone;
+
+	@Column(name = "email")
+	private String email;
+
+	@OneToMany(mappedBy = "ClientBO", cascade = CascadeType.ALL)
+	private List<ReviewBO> ReviewBOs;
+
+	public ClientBO() {
+
+	}
+
+	public ClientBO(String name, String contactPerson, String phone, String email) {
+
+		this.name = name;
+		this.contactPerson = contactPerson;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<ReviewBO> getReviewBOs() {
+		return ReviewBOs;
+	}
+
+	public void setReviewBOs(List<ReviewBO> ReviewBOs) {
+		this.ReviewBOs = ReviewBOs;
+	}
+	
+	public void add(ReviewBO ReviewBO) {
+		
+		if (ReviewBOs ==null) {
+			ReviewBOs = new ArrayList<com.pavan.model.ReviewBO>();
+		}
+		ReviewBOs.add(ReviewBO);
+		ReviewBO.setClientBO(this);
+	}
+
+	@Override
+	public String toString() {
+		return "ClientBO [id=" + id + ", name=" + name + ", contactPerson=" + contactPerson + ", phone=" + phone
+				+ ", email=" + email + "]";
+	}
+	
+	
+}

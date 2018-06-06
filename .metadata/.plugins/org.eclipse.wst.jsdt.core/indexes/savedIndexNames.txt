@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\Rida\Develop\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+4168254413.index
+3162846157.index
+3795758535.index
+2220666312.index
+1641549968.index
